@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/bottom_menu_title1"/>
+    <item
+        android:id="@+id/smashlist"
+        android:enabled="true"
+        android:icon="@drawable/ic_smashlist"
+        android:title="@string/bottom_menu_title2"/>
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/bottom_menu_title3"/>
+</menu>

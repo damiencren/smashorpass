@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">smash-or-pass</string>
+
+    <string name="home_page_title">SmashLists</string>
+    <!--Bottom menu strings-->
+    <string name="bottom_menu_title1">Home</string>
+    <string name="bottom_menu_title2">SmashList</string>
+    <string name="bottom_menu_title3">Profile</string>
+
+    <string name="item_category_vertical_rv_name">Category Name</string>
+</resources>
