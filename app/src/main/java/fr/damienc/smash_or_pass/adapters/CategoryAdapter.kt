@@ -29,11 +29,6 @@ class CategoryAdapter (private val categoryList: List<Category>) : RecyclerView.
 
         val smashListList = ArrayList<SmashList>()
 
-        smashListList.add(SmashList())
-        smashListList.add(SmashList())
-        smashListList.add(SmashList())
-        smashListList.add(SmashList())
-        smashListList.add(SmashList())
 
         holder.categoryRecylerView.adapter = SmashListAdapter(smashListList)
     }

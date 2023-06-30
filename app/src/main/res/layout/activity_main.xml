@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-        app:menu="@menu/bottom_navigation_menu">
+        app:menu="@menu/bottom_navigation_menu"
+        android:background="@android:color/transparent">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -26,6 +27,8 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:name="fr.damienc.smash_or_pass.fragments.HomeFragment"
+        tools:layout="@layout/fragment_home" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

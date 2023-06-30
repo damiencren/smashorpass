@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        showPopup()
 
         val BottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
@@ -41,5 +42,12 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    private fun showPopup() {
+        val popup = `LoginActivity`(this)
+        popup.setCancelable(false)
+        popup.show()
+    }
+
 
 }

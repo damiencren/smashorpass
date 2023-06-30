@@ -8,4 +8,16 @@
     <string name="bottom_menu_title3">Profile</string>
 
     <string name="item_category_vertical_rv_name">Category Name</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="tab_layout_item_login">Login</string>
+    <string name="tab_layout_item_register">Register</string>
 </resources>

@@ -1,5 +1,6 @@
 package fr.damienc.smash_or_pass.fragments
 
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,8 +9,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fr.damienc.smash_or_pass.MainActivity
 import fr.damienc.smash_or_pass.R
+import androidx.lifecycle.lifecycleScope
 import fr.damienc.smash_or_pass.adapters.CategoryAdapter
 import fr.damienc.smash_or_pass.models.Category
+import fr.damienc.smash_or_pass.models.SmashListManager
+import fr.damienc.smash_or_pass.models.UserManager
+import fr.damienc.smash_or_pass.models.UserManager.createUser
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -17,7 +23,6 @@ import fr.damienc.smash_or_pass.models.Category
  * create an instance of this fragment.
  */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -48,7 +53,14 @@ class HomeFragment : Fragment() {
         return view
 
 
-
-
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+        }
+    }
+
+
+
 }
