@@ -19,6 +19,7 @@
         <item name="android:navigationBarColor">@color/orange</item> <!-- couleur de la barre du bas-->
         <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
         <item name="android:windowBackground">@color/black</item> <!-- couleur de la barre du haut-->
+        <item name="android:backgroundTint">@color/dark_grey</item> <!-- couleur du fond-->
     </style>
 
     <style name="DefaultTextStyle">

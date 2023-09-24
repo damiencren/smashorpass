@@ -1,5 +1,7 @@
 package fr.damienc.smash_or_pass.adapters
 
+import android.content.ContentValues
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.damienc.smash_or_pass.R
 import fr.damienc.smash_or_pass.models.Category
-import fr.damienc.smash_or_pass.models.SmashList
+import fr.damienc.smash_or_pass.models.SmashListData
+import fr.damienc.smash_or_pass.utils.SmashListManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CategoryAdapter (private val categoryList: List<Category>) : RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -27,7 +34,8 @@ class CategoryAdapter (private val categoryList: List<Category>) : RecyclerView.
         holder.categoryName.text = currentItem.name
 
 
-        val smashListList = ArrayList<SmashList>()
+        val smashListList = ArrayList<SmashListData>()
+
 
 
         holder.categoryRecylerView.adapter = SmashListAdapter(smashListList)

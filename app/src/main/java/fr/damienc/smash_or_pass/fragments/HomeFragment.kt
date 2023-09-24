@@ -1,21 +1,24 @@
 package fr.damienc.smash_or_pass.fragments
 
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import fr.damienc.smash_or_pass.MainActivity
 import fr.damienc.smash_or_pass.R
 import androidx.lifecycle.lifecycleScope
 import fr.damienc.smash_or_pass.adapters.CategoryAdapter
 import fr.damienc.smash_or_pass.models.Category
-import fr.damienc.smash_or_pass.models.SmashListManager
-import fr.damienc.smash_or_pass.models.UserManager
-import fr.damienc.smash_or_pass.models.UserManager.createUser
+import fr.damienc.smash_or_pass.models.SmashListData
+import fr.damienc.smash_or_pass.utils.SmashListManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass.
@@ -23,12 +26,39 @@ import kotlinx.coroutines.launch
  * create an instance of this fragment.
  */
 class HomeFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+    val categoryList = ArrayList<Category>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        val smashListList = ArrayList<SmashListData>()
+
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val response = SmashListManager.getSmashList(
+                ""
+            )
+
+            withContext(Dispatchers.Main) {
+                if (response != null && !response.error) {
+                    Log.d(ContentValues.TAG,response.message)
+                    val smashListData = response.data
+                    if (smashListData != null) {
+                        for (smashList in smashListData) {
+                            smashListList.add(smashList)
+                        }
+                    }
+                } else {
+                    Log.d(ContentValues.TAG,"Échec de la connexion")
+                    // Gérer l'échec de la connexion ici
+                }
+            }
+        }
+
+
+        categoryList.add(Category("Popular", smashListList))
+        categoryList.add(Category("Popular2", smashListList))
     }
 
     override fun onCreateView(
@@ -41,12 +71,7 @@ class HomeFragment : Fragment() {
 
         val horizontalScrollingView = view.findViewById<RecyclerView>(R.id.fragment_home_rv)
 
-        val categoryList = ArrayList<Category>()
 
-        categoryList.add(Category("Popular"))
-        categoryList.add(Category("Popular"))
-        categoryList.add(Category("Popular"))
-        categoryList.add(Category("Popular"))
 
 
         horizontalScrollingView.adapter = CategoryAdapter(categoryList)

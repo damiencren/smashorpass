@@ -1,9 +1,5 @@
 package fr.damienc.smash_or_pass.fragments
 
-import android.app.Dialog
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,22 +7,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import fr.damienc.smash_or_pass.R
-import fr.damienc.smash_or_pass.models.UserManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class RegisterFragment : DialogFragment() {
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        return dialog
-    }
+class RegisterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,10 +34,10 @@ class RegisterFragment : DialogFragment() {
                         nameET.text.toString(),
                         mailET.text.toString(),
                         passwordET.text.toString()
-                    ).toString()
+                    )
 
                     withContext(Dispatchers.Main) {
-                        tv.text = text
+                        tv.text = text.toString()
                     }
                 }
             }

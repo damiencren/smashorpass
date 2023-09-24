@@ -1,18 +1,29 @@
-package fr.damienc.smash_or_pass
+package fr.damienc.smash_or_pass.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import fr.damienc.smash_or_pass.R
 import fr.damienc.smash_or_pass.fragments.HomeFragment
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        showPopup()
+        val sharedPreference =  getSharedPreferences("USER_DATA",MODE_PRIVATE)
+
+        if (!sharedPreference.contains("token")) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        val token  = sharedPreference.getString("token","unknown")
+
 
         val BottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
@@ -43,11 +54,6 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    private fun showPopup() {
-        val popup = `LoginActivity`(this)
-        popup.setCancelable(false)
-        popup.show()
-    }
 
 
 }

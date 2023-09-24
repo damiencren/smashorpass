@@ -1,33 +1,21 @@
-package fr.damienc.smash_or_pass.fragments
-
-import android.app.Dialog
+import android.content.ContentValues
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import fr.damienc.smash_or_pass.R
-import fr.damienc.smash_or_pass.models.UserManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginFragment : DialogFragment() {
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        return dialog
-    }
+class LoginFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +30,26 @@ class LoginFragment : DialogFragment() {
         view.findViewById<Button>(R.id.activity_login_btn_create)
             .setOnClickListener {
                 GlobalScope.launch(Dispatchers.IO) {
-                    val text = UserManager.getUser(
+                    val response = UserManager.getUser(
                         nameET.text.toString(),
                         passwordET.text.toString()
-                    ).toString()
+                    )
 
                     withContext(Dispatchers.Main) {
-                        tv.text = text
+                        if (response != null && !response.error) {
+                            tv.text = response.message
+
+                            val token = response.data?.token
+                            if (token != null) {
+                                UserManager.saveToken(requireContext(), token)
+                                Log.d(ContentValues.TAG, "token : $token")
+
+                                requireActivity().finish()
+                            }
+                        } else {
+                            tv.text = "Échec de la connexion"
+                            // Gérer l'échec de la connexion ici
+                        }
                     }
                 }
             }
