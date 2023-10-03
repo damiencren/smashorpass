@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
                                 requireActivity().finish()
                             }
                         } else {
-                            tv.text = "Échec de la connexion"
+                            tv.text = response?.error.toString();
                             // Gérer l'échec de la connexion ici
                         }
                     }

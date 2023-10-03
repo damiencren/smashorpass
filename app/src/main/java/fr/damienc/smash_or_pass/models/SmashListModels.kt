@@ -7,11 +7,15 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface SmashListService {
-    @POST("smashlist")
-    suspend fun createSmashList(@Body userData: SmashListData): Response<SmashListResponse>
 
     @GET("smashlist")
     suspend fun getSmashList(@Query("name") name: String): Response<SmashListResponse>
+
+    //TODO : CHANGER BODY PAR QUERY
+    @POST("smashlist")
+    suspend fun createSmashList(@Body userData: SmashListData): Response<SmashListResponse>
+
+
 }
 
 data class SmashListResponse(val error: Boolean, val message: String,val data: List<SmashListData>?)

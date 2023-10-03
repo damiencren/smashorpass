@@ -11,10 +11,10 @@ interface UserService {
     suspend fun getUser(@Query("username") username: String, @Query("password") password: String): Response<UserResponse>
 
     @POST("user")
-    suspend fun createUser(@Body userData: UserData): Response<UserResponse>
+    suspend fun createUser(@Query("username") username: String, @Query("password") password: String, @Query("email") email: String): Response<UserResponse>
 }
 data class UserResponse(val error: Boolean, val message: String, val data: UserToken?)
 
 data class UserToken(val token: String)
 
-data class UserData(val name: String, val mail : String, val password : String)
+data class UserData(val username: String, val password : String, val email : String)

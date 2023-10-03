@@ -37,20 +37,23 @@ class HomeFragment : Fragment() {
 
         GlobalScope.launch(Dispatchers.IO) {
             val response = SmashListManager.getSmashList(
-                ""
+                "France"
             )
 
             withContext(Dispatchers.Main) {
                 if (response != null && !response.error) {
                     Log.d(ContentValues.TAG,response.message)
+
                     val smashListData = response.data
+
                     if (smashListData != null) {
+                        Log.d(ContentValues.TAG,response.data.toString());
                         for (smashList in smashListData) {
                             smashListList.add(smashList)
                         }
                     }
                 } else {
-                    Log.d(ContentValues.TAG,"Échec de la connexion")
+                    Log.d(ContentValues.TAG,response?.error.toString())
                     // Gérer l'échec de la connexion ici
                 }
             }

@@ -1,6 +1,9 @@
 package fr.damienc.smash_or_pass.fragments
 
+import LoginFragment
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,14 +33,24 @@ class RegisterFragment : Fragment() {
         view.findViewById<Button>(R.id.activity_login_btn_create)
             .setOnClickListener {
                 GlobalScope.launch(Dispatchers.IO) {
-                    val text = UserManager.createUser(
+                    val response = UserManager.createUser(
                         nameET.text.toString(),
                         mailET.text.toString(),
                         passwordET.text.toString()
                     )
 
                     withContext(Dispatchers.Main) {
-                        tv.text = text.toString()
+                        if (response != null && !response.error) {
+                            tv.text = response.message
+
+                            val fragmentManager = requireActivity().supportFragmentManager
+                            val fragmentTransaction = fragmentManager.beginTransaction()
+                            fragmentTransaction.replace(R.id.activity_main_fcv, LoginFragment())
+
+
+                        } else {
+                            tv.text = response?.error.toString();
+                        }
                     }
                 }
             }

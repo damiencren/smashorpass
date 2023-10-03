@@ -25,9 +25,10 @@ object UserManager {
 
     private val userService = retrofit.create(UserService::class.java)
 
-    suspend fun createUser(name: String, mail: String, password: String): UserResponse? {
-        val userData = UserData(name, mail, password)
-        val response = userService.createUser(userData)
+    suspend fun createUser(username: String, password: String, email: String): UserResponse? {
+        val response = userService.createUser(username, password ,email)
+
+        Log.d(TAG, response.toString())
         return if (response.isSuccessful) {
             response.body()
         } else {
@@ -39,7 +40,6 @@ object UserManager {
         val response = userService.getUser(username, password)
         Log.d(TAG, response.toString())
         return if (response.isSuccessful) {
-
             response.body()
         } else {
             null
